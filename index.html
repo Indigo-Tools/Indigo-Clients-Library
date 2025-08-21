@@ -148,6 +148,52 @@
     </div>
 
     <script>
+        // Placeholder for the JSON data structure
+        // In a real-world scenario, you would have this in a separate clients.json file.
+        // I've included it here as a commented-out reference for the required structure.
+        /*
+        [
+            {
+                "id": "glacier-client",
+                "name": "Glacier Client",
+                "author": "Pepe",
+                "description": "Glacier Client is an all-in-one PVP client for Minecraft Bedrock Edition. It features a custom user interface, a wide range of utility mods, and a sleek, modern design.",
+                "icon": "https://placehold.co/100x100/313338/ffffff?text=GC",
+                "screenshots": [
+                    "https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Glacier+Client+Screenshot+1",
+                    "https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Glacier+Client+Screenshot+2"
+                ],
+                "downloads": [
+                    { "version": "v4", "url": "https://example.com/glacier/v4.mcpack" },
+                    { "version": "v5", "url": "https://example.com/glacier/v5.mcpack" },
+                    { "version": "v6", "url": "https://example.com/glacier/v6.mcpack" }
+                ],
+                "socials": {
+                    "discord": "https://discord.com",
+                    "youtube": "https://youtube.com"
+                }
+            },
+            {
+                "id": "project-light",
+                "name": "Project Light",
+                "author": "Indigo",
+                "description": "Project Light is a lightweight client focusing on performance and a minimalist aesthetic. It's perfect for players who want a clean experience without a lot of clutter.",
+                "icon": "https://placehold.co/100x100/52489c/ffffff?text=PL",
+                "screenshots": [
+                    "https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Project+Light+Screenshot+1",
+                    "https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Project+Light+Screenshot+2"
+                ],
+                "downloads": [
+                    { "version": "v1.0", "url": "https://example.com/project-light/v1.0.mcpack" },
+                    { "version": "v1.1", "url": "https://example.com/project-light/v1.1.mcpack" }
+                ],
+                "socials": {
+                    "discord": "https://discord.com"
+                }
+            }
+        ]
+        */
+
         let clients = [];
         
         const clientListContainer = document.getElementById('client-list');
@@ -272,24 +318,29 @@
             renderScreenshot(currentScreenshotIndex);
             
             downloadsContainer.innerHTML = '';
-            client.downloads.forEach(version => {
+            client.downloads.forEach(download => {
                 const downloadBtn = document.createElement('a');
-                downloadBtn.href = '#';
+                downloadBtn.href = download.url;
+                downloadBtn.target = '_blank';
                 
                 let iconClass = 'fas fa-download';
                 let buttonColor = 'bg-accent';
-                if (client.id === 'glacier-client' && version === 'v4') {
+                if (download.url === '#') { // Check if the URL is a placeholder
                     iconClass = 'fas fa-times';
                     buttonColor = 'bg-red-600';
                 }
 
                 downloadBtn.classList.add('flex', 'items-center', 'gap-2', 'px-4', 'py-2', 'rounded-lg', 'font-bold', 'text-white', buttonColor, 'shadow', 'hover:bg-opacity-80', 'transition-colors');
-                downloadBtn.innerHTML = `<i class="${iconClass}"></i> v${version}`;
+                downloadBtn.innerHTML = `<i class="${iconClass}"></i> v${download.version}`;
 
                 downloadBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    console.log(`Downloading ${client.name} version ${version}`);
-                    showMessage(`Downloading ${client.name} v${version}. This is a placeholder.`, 'info');
+                    if (download.url === '#') {
+                        e.preventDefault();
+                        showMessage(`Download link for ${client.name} v${download.version} is not available.`, 'info');
+                    } else {
+                        console.log(`Downloading ${client.name} version ${download.version} from URL: ${download.url}`);
+                        showMessage(`Downloading ${client.name} v${download.version}. Opening new tab...`, 'info');
+                    }
                 });
                 downloadsContainer.appendChild(downloadBtn);
             });
@@ -315,7 +366,7 @@
             function showMessage(message, type) {
                 const messageBox = document.createElement('div');
                 messageBox.textContent = message;
-                messageBox.classList.add('fixed', 'bottom-4', 'left-1/2', '-translate-x-1/2', 'p-4', 'rounded-lg', 'text-white', 'z-50');
+                messageBox.classList.add('fixed', 'bottom-4', 'left-1/2', '-translate-x-1/2', 'p-4', 'rounded-lg', 'text-white', 'z-50', 'transform', 'translate-x-[-50%]');
                 if (type === 'info') {
                     messageBox.classList.add('bg-blue-600');
                 } else if (type === 'success') {
@@ -357,6 +408,7 @@
             });
         }
 
+        // Fetch client data from a JSON file
         fetch('clients.json')
             .then(response => {
                 if (!response.ok) {
