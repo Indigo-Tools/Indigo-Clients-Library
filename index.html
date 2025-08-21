@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Indigo's Client Library</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script>
-        // Tailwind configuration to match the provided design language
         tailwind.config = {
             darkMode: 'class',
             theme: {
@@ -25,10 +22,8 @@
         };
     </script>
     <style>
-        /* Import the Inter font */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-        /* Keyframe animations for transitions */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -39,18 +34,15 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Apply slideUp animation to the main containers */
         #list-page, #client-page {
             animation: slideUp 0.8s ease-out forwards;
             opacity: 0;
         }
 
-        /* Add fade-in for client cards within the grid */
         .client-card-fade-in {
             animation: fadeIn 0.5s ease-out forwards;
         }
 
-        /* Custom scrollbar to match the dark theme */
         .custom-scrollbar::-webkit-scrollbar {
             width: 8px;
         }
@@ -61,7 +53,6 @@
         .custom-scrollbar::-webkit-scrollbar-track {
             background-color: transparent;
         }
-        /* Hide scrollbar in Firefox */
         .custom-scrollbar {
             scrollbar-width: thin;
             scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
@@ -73,7 +64,6 @@
     <div class="p-6 lg:p-12 max-w-7xl mx-auto w-full">
         <div class="flex justify-between items-center mb-10">
             <h1 class="text-3xl lg:text-4xl font-bold text-accent">Indigo's Client Library</h1>
-            <!-- Theme toggle button -->
             <button id="themeToggle" class="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
                 <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -84,10 +74,8 @@
             </button>
         </div>
 
-        <!-- Main content container -->
         <div id="main-container" class="w-full relative min-h-[600px]">
             
-            <!-- List Page (Grid View) -->
             <div id="list-page" class="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 lg:p-12 absolute inset-0">
                 <header class="mb-8">
                     <h2 class="text-2xl lg:text-3xl font-bold mb-2 text-gray-800 dark:text-gray-100">Client Library</h2>
@@ -96,17 +84,13 @@
                     </p>
                 </header>
 
-                <!-- Client Grid -->
                 <div id="client-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Loading indicator -->
                     <div id="loading-indicator" class="col-span-full text-center text-gray-500 dark:text-gray-400">
                         Loading client data...
                     </div>
-                    <!-- Client cards will be injected here by JS -->
                 </div>
             </div>
 
-            <!-- Client Detail Page -->
             <div id="client-page" class="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 lg:p-12 absolute inset-0 hidden">
                 <header class="flex justify-between items-center mb-6">
                     <button id="go-back-btn" class="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-300">
@@ -117,7 +101,6 @@
                 </header>
 
                 <div class="space-y-6 custom-scrollbar overflow-y-auto max-h-[600px] pr-4">
-                    <!-- Client Card -->
                     <div class="flex items-start gap-4 p-4 rounded-xl bg-gray-200 dark:bg-gray-700">
                         <img id="client-icon" src="" alt="Client Icon" class="w-16 h-16 rounded-lg">
                         <div class="flex-1">
@@ -126,20 +109,16 @@
                         </div>
                     </div>
 
-                    <!-- Description -->
                     <div>
                         <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">Description</h3>
                         <p id="client-description" class="text-gray-600 dark:text-gray-300 leading-relaxed"></p>
                     </div>
 
-                    <!-- Screenshots -->
                     <div>
                         <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">Screenshots</h3>
-                        <!-- Screenshot cycler container -->
                         <div class="relative w-full rounded-lg overflow-hidden">
                             <img id="main-screenshot" src="" alt="Client Screenshot" class="w-full h-auto object-cover">
                             
-                            <!-- Navigation Buttons -->
                             <button id="prev-btn" class="absolute top-1/2 left-4 transform -translate-y-1/2 p-2 rounded-full bg-black bg-opacity-50 text-white hover:bg-opacity-75 transition-all">
                                 <i class="fas fa-chevron-left"></i>
                             </button>
@@ -147,26 +126,20 @@
                                 <i class="fas fa-chevron-right"></i>
                             </button>
 
-                            <!-- Dots Indicator -->
                             <div id="dots-container" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
-                                <!-- Dots will be injected here -->
                             </div>
                         </div>
                     </div>
 
-                    <!-- Downloads -->
                     <div>
                         <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">Downloads</h3>
                         <div id="downloads-container" class="flex flex-wrap gap-4">
-                            <!-- Download buttons will be injected here -->
                         </div>
                     </div>
 
-                    <!-- Socials -->
                     <div>
                         <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">Socials</h3>
                         <div id="socials-container" class="flex items-center gap-4">
-                            <!-- Social icons will be injected here -->
                         </div>
                     </div>
                 </div>
@@ -175,17 +148,14 @@
     </div>
 
     <script>
-        // Data for all clients. This will be loaded from an external JSON file.
         let clients = [];
         
-        // Get main container elements
         const clientListContainer = document.getElementById('client-list');
         const listPage = document.getElementById('list-page');
         const clientPage = document.getElementById('client-page');
         const goBackBtn = document.getElementById('go-back-btn');
         const loadingIndicator = document.getElementById('loading-indicator');
 
-        // Get elements for the client page
         const clientTitle = document.getElementById('client-title');
         const clientCardTitle = document.getElementById('client-card-title');
         const clientAuthor = document.getElementById('client-author');
@@ -198,7 +168,6 @@
         const downloadsContainer = document.getElementById('downloads-container');
         const socialsContainer = document.getElementById('socials-container');
         
-        // Theme toggle elements and logic
         const themeToggle = document.getElementById('themeToggle');
         const sunIcon = document.getElementById('sun-icon');
         const moonIcon = document.getElementById('moon-icon');
@@ -219,7 +188,6 @@
             }
         }
 
-        // Apply saved theme on load
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
@@ -229,17 +197,14 @@
         }
         themeToggle.addEventListener('click', toggleTheme);
 
-        // State for the screenshot cycler
         let currentScreenshotIndex = 0;
         let currentClientScreenshots = [];
 
-        // Function to render a specific screenshot and update the dots
         function renderScreenshot(index) {
             mainScreenshot.src = currentClientScreenshots[index];
             updateDots(index);
         }
 
-        // Function to update the dot indicators
         function updateDots(index) {
             dotsContainer.innerHTML = '';
             currentClientScreenshots.forEach((_, i) => {
@@ -258,14 +223,12 @@
             });
         }
         
-        // Function to render the client list as a grid
         function renderClientList(data) {
-            clients = data; // Store the fetched data globally
-            loadingIndicator.style.display = 'none'; // Hide loading indicator
-            clientListContainer.innerHTML = ''; // Clear any existing content
+            clients = data;
+            loadingIndicator.style.display = 'none';
+            clientListContainer.innerHTML = '';
             clients.forEach((client, index) => {
                 const clientCard = document.createElement('div');
-                // Apply the new card design and fade-in animation
                 clientCard.classList.add(
                     'bg-gray-200', 'dark:bg-gray-700', 'rounded-lg', 'p-6', 'cursor-pointer', 
                     'shadow', 'hover:shadow-lg', 'hover:scale-105', 'transition-all', 'duration-300',
@@ -290,7 +253,6 @@
             });
         }
 
-        // Function to render a specific client's page
         function renderClientPage(clientId) {
             const client = clients.find(c => c.id === clientId);
             if (!client) {
@@ -298,21 +260,17 @@
                 return;
             }
             
-            // Reset screenshot index and data
             currentScreenshotIndex = 0;
             currentClientScreenshots = client.screenshots;
             
-            // Populate the client page with data
             clientTitle.textContent = client.name;
             clientCardTitle.textContent = client.name;
             clientAuthor.textContent = `By ${client.author}`;
             clientIcon.src = client.icon;
             clientDescription.textContent = client.description;
 
-            // Render initial screenshot and dots
             renderScreenshot(currentScreenshotIndex);
             
-            // Render downloads
             downloadsContainer.innerHTML = '';
             client.downloads.forEach(version => {
                 const downloadBtn = document.createElement('a');
@@ -321,7 +279,7 @@
                 let iconClass = 'fas fa-download';
                 let buttonColor = 'bg-accent';
                 if (client.id === 'glacier-client' && version === 'v4') {
-                    iconClass = 'fas fa-times'; // 'x' icon
+                    iconClass = 'fas fa-times';
                     buttonColor = 'bg-red-600';
                 }
 
@@ -336,7 +294,6 @@
                 downloadsContainer.appendChild(downloadBtn);
             });
 
-            // Render socials
             socialsContainer.innerHTML = '';
             if (client.socials.discord) {
                 const discordLink = document.createElement('a');
@@ -355,7 +312,6 @@
                 socialsContainer.appendChild(youtubeLink);
             }
 
-            // Simple message box function instead of alert()
             function showMessage(message, type) {
                 const messageBox = document.createElement('div');
                 messageBox.textContent = message;
@@ -373,30 +329,34 @@
                 }, 3000);
             }
 
-            // Show client page and hide list
             listPage.classList.add('hidden');
             clientPage.classList.remove('hidden');
         }
 
-        // Event listener for next button
         nextBtn.addEventListener('click', () => {
             currentScreenshotIndex = (currentScreenshotIndex + 1) % currentClientScreenshots.length;
             renderScreenshot(currentScreenshotIndex);
         });
 
-        // Event listener for previous button
         prevBtn.addEventListener('click', () => {
             currentScreenshotIndex = (currentScreenshotIndex - 1 + currentClientScreenshots.length) % currentClientScreenshots.length;
             renderScreenshot(currentScreenshotIndex);
         });
 
-        // Event listener for the "Go Back" button
         goBackBtn.addEventListener('click', () => {
             clientPage.classList.add('hidden');
             listPage.classList.remove('hidden');
         });
 
-        // Fetch data from external JSON file on page load
+        function preloadScreenshots(data) {
+            data.forEach(client => {
+                client.screenshots.forEach(screenshotUrl => {
+                    const img = new Image();
+                    img.src = screenshotUrl;
+                });
+            });
+        }
+
         fetch('clients.json')
             .then(response => {
                 if (!response.ok) {
@@ -406,6 +366,7 @@
             })
             .then(data => {
                 renderClientList(data);
+                preloadScreenshots(data);
             })
             .catch(error => {
                 console.error('Error fetching the client data:', error);
