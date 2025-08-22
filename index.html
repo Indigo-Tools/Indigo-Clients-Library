@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Indigo's Client Library</title>
-    <!-- Include Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Include Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
     <script>
-        // Tailwind configuration, including dark mode and custom colors/fonts.
         tailwind.config = {
             darkMode: 'class',
             theme: {
@@ -26,30 +23,17 @@
         };
     </script>
     <style>
-        /* Import the Inter font from Google Fonts */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-
-        /* Keyframe animations for transitions */
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Styles for page transitions */
-        .page-transition {
-            animation: slideUp 0.8s ease-out forwards;
         }
 
         .client-card-fade-in {
             animation: fadeIn 0.5s ease-out forwards;
         }
 
-        /* Custom scrollbar for the client details page */
         .custom-scrollbar::-webkit-scrollbar {
             width: 8px;
         }
@@ -68,42 +52,43 @@
 </head>
 <body class="font-sans bg-gray-100 dark:bg-gray-900 transition-colors duration-500 text-gray-900 dark:text-gray-100 min-h-screen">
 
-    <div class="p-6 lg:p-12 max-w-7xl mx-auto w-full">
-        <!-- Header with title and theme toggle button -->
-        <div class="flex justify-between items-center mb-10">
-            <h1 class="text-3xl lg:text-4xl font-bold text-accent">Indigo's Client Library</h1>
-            <button id="themeToggle" class="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
-                <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-                <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-            </button>
+    <div class="p-4 lg:p-12 max-w-7xl mx-auto w-full">
+        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-8 gap-4">
+            <h1 class="text-3xl lg:text-4xl font-bold text-accent text-center md:text-left">Indigo's Client Library</h1>
+            <div class="flex items-center gap-4">
+                <div class="relative w-full md:w-auto">
+                    <input type="text" id="searchInput" placeholder="Search clients..." class="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-accent transition-colors duration-300">
+                    <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400"></i>
+                </div>
+                <button id="themeToggle" class="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
+                    <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
         </div>
 
-        <!-- Main container with dynamic height -->
-        <div id="main-container" class="w-full relative">
-
-            <!-- Page for displaying the list of clients -->
-            <div id="list-page" class="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 lg:p-12 absolute inset-0">
+        <div id="main-container" class="w-full relative min-h-[600px]">
+            <div id="list-page" class="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 lg:p-12">
                 <header class="mb-8">
                     <h2 class="text-2xl lg:text-3xl font-bold mb-2 text-gray-800 dark:text-gray-100">Client Library</h2>
                     <p class="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
                         An archive of various Minecraft Bedrock Edition clients from 2020-2025. Explore their history, features, and screenshots.
                     </p>
                 </header>
-
-                <div id="client-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 min-w-0">
-                    <!-- Loading indicator is shown until data is loaded -->
+                <div id="client-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div id="loading-indicator" class="col-span-full text-center text-gray-500 dark:text-gray-400">
                         Loading client data...
                     </div>
                 </div>
+                <div id="pagination-container" class="mt-8 flex justify-center items-center space-x-2">
+                </div>
             </div>
-
-            <!-- Page for displaying details of a single client -->
-            <div id="client-page" class="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 lg:p-12 absolute inset-0 hidden">
+            
+            <div id="client-page" class="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 lg:p-12 hidden">
                 <header class="flex justify-between items-center mb-6">
                     <button id="go-back-btn" class="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-300">
                         <i class="fas fa-arrow-left"></i>
@@ -112,9 +97,7 @@
                     <h1 id="client-title" class="text-3xl font-bold text-gray-800 dark:text-gray-100"></h1>
                 </header>
 
-                <!-- Scrollable content area for client details -->
                 <div class="space-y-6 custom-scrollbar overflow-y-auto max-h-[600px] pr-4">
-                    <!-- Main client info card -->
                     <div class="flex items-start gap-4 p-4 rounded-xl bg-gray-200 dark:bg-gray-700">
                         <img id="client-icon" src="" alt="Client Icon" class="w-16 h-16 rounded-lg">
                         <div class="flex-1">
@@ -123,19 +106,16 @@
                         </div>
                     </div>
 
-                    <!-- Description section -->
                     <div>
                         <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">Description</h3>
                         <p id="client-description" class="text-gray-600 dark:text-gray-300 leading-relaxed"></p>
                     </div>
 
-                    <!-- Screenshots section with carousel functionality -->
                     <div>
                         <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">Screenshots</h3>
                         <div class="relative w-full rounded-lg overflow-hidden">
                             <img id="main-screenshot" src="" alt="Client Screenshot" class="w-full h-auto object-cover">
-
-                            <!-- Carousel navigation buttons -->
+                            
                             <button id="prev-btn" class="absolute top-1/2 left-4 transform -translate-y-1/2 p-2 rounded-full bg-black bg-opacity-50 text-white hover:bg-opacity-75 transition-all">
                                 <i class="fas fa-chevron-left"></i>
                             </button>
@@ -143,20 +123,17 @@
                                 <i class="fas fa-chevron-right"></i>
                             </button>
 
-                            <!-- Carousel dots for navigation -->
                             <div id="dots-container" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
                             </div>
                         </div>
                     </div>
 
-                    <!-- Downloads section -->
                     <div>
                         <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">Downloads</h3>
                         <div id="downloads-container" class="flex flex-wrap gap-4">
                         </div>
                     </div>
 
-                    <!-- Socials section -->
                     <div>
                         <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">Socials</h3>
                         <div id="socials-container" class="flex items-center gap-4">
@@ -168,29 +145,18 @@
     </div>
 
     <script>
-        // Data structure provided by the user, for reference.
-        /*
-        {
-            "id": "glacier-client",
-            "name": "Glacier Client",
-            "author": "Pepe",
-            "description": "...",
-            "icon": "https://placehold.co/64x64/2A2A2A/ffffff?text=GC",
-            "screenshots": [ "..." ],
-            "downloads": {
-                "v4": "https://mediafire.com/link-to-v4",
-                "v5": "https://mediafire.com/file/Ehq82ndow29nsvh/Glacier_Client_v5.mcpack/"
-            },
-            "socials": { "..." }
-        }
-        */
+        let allClients = [];
+        let filteredClients = [];
+        let currentPage = 1;
+        const CLIENTS_PER_PAGE = 9;
 
-        // --- DOM ELEMENT SELECTION ---
         const clientListContainer = document.getElementById('client-list');
         const listPage = document.getElementById('list-page');
         const clientPage = document.getElementById('client-page');
         const goBackBtn = document.getElementById('go-back-btn');
         const loadingIndicator = document.getElementById('loading-indicator');
+        const paginationContainer = document.getElementById('pagination-container');
+        const searchInput = document.getElementById('searchInput');
         
         const clientTitle = document.getElementById('client-title');
         const clientCardTitle = document.getElementById('client-card-title');
@@ -203,22 +169,17 @@
         const dotsContainer = document.getElementById('dots-container');
         const downloadsContainer = document.getElementById('downloads-container');
         const socialsContainer = document.getElementById('socials-container');
-        
+
         const themeToggle = document.getElementById('themeToggle');
         const sunIcon = document.getElementById('sun-icon');
         const moonIcon = document.getElementById('moon-icon');
-        
-        let clientsData = [];
-        let currentScreenshotIndex = 0;
-        let currentClientScreenshots = [];
 
-        // --- THEME TOGGLE FUNCTIONALITY ---
         function toggleTheme() {
             const isDark = document.documentElement.classList.toggle('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             updateThemeIcons(isDark);
         }
-        
+
         function updateThemeIcons(isDark) {
             if (isDark) {
                 sunIcon.style.display = 'block';
@@ -228,8 +189,7 @@
                 moonIcon.style.display = 'block';
             }
         }
-        
-        // Apply saved theme on page load
+
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
@@ -239,49 +199,18 @@
         }
         themeToggle.addEventListener('click', toggleTheme);
 
-        // --- MESSAGE BOX UTILITY ---
-        function showMessage(message, type = 'info') {
-            const messageBox = document.createElement('div');
-            messageBox.textContent = message;
-            messageBox.classList.add(
-                'fixed', 'bottom-4', 'left-1/2', 'p-4', 'rounded-lg', 'text-white', 'z-50',
-                'transition-all', 'duration-300', 'transform', '-translate-x-1/2', 'opacity-0'
-            );
-            if (type === 'info') {
-                messageBox.classList.add('bg-blue-600');
-            } else if (type === 'success') {
-                messageBox.classList.add('bg-green-600');
-            } else if (type === 'error') {
-                messageBox.classList.add('bg-red-600');
-            }
-            document.body.appendChild(messageBox);
-            // Animate fade-in
-            setTimeout(() => {
-                messageBox.style.opacity = '1';
-            }, 10);
-            // Remove after a delay
-            setTimeout(() => {
-                messageBox.style.opacity = '0';
-                messageBox.addEventListener('transitionend', () => messageBox.remove());
-            }, 3000);
-        }
-        
-        // --- SCREENSHOT CAROUSEL FUNCTIONS ---
+        let currentScreenshotIndex = 0;
+        let currentClientScreenshots = [];
+
         function renderScreenshot(index) {
-            // Note: Relative paths like "assets/screenshots/..." will not work
-            // in a self-contained HTML file. For a working demo, the code will
-            // use a placeholder image if the URL is not a valid web URL.
-            const screenshotUrl = currentClientScreenshots[index];
-            if (screenshotUrl.startsWith('http')) {
-                mainScreenshot.src = screenshotUrl;
+            if (currentClientScreenshots.length > 0) {
+                mainScreenshot.src = currentClientScreenshots[index];
             } else {
-                // Use a placeholder if the path is not an external URL.
-                mainScreenshot.src = `https://placehold.co/800x450/cccccc/333333?text=Image+Not+Found`;
-                showMessage('Local image paths will not work in this preview.', 'info');
+                mainScreenshot.src = 'https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=No+Screenshots+Available';
             }
             updateDots(index);
         }
-        
+
         function updateDots(index) {
             dotsContainer.innerHTML = '';
             currentClientScreenshots.forEach((_, i) => {
@@ -300,44 +229,99 @@
             });
         }
         
-        // --- PAGE RENDERING LOGIC ---
-        function renderClientList() {
+        function renderClientList(clientsData) {
             loadingIndicator.style.display = 'none';
-            clientListContainer.innerHTML = ''; // Clear previous list
+            clientListContainer.innerHTML = '';
             
-            clientsData.forEach((client, index) => {
+            const startIndex = (currentPage - 1) * CLIENTS_PER_PAGE;
+            const endIndex = startIndex + CLIENTS_PER_PAGE;
+            const clientsToDisplay = clientsData.slice(startIndex, endIndex);
+
+            if (clientsToDisplay.length === 0) {
+                clientListContainer.innerHTML = '<p class="col-span-full text-center text-gray-500 dark:text-gray-400">No clients found matching your search.</p>';
+                paginationContainer.innerHTML = '';
+                return;
+            }
+
+            clientsToDisplay.forEach((client, index) => {
                 const clientCard = document.createElement('div');
                 clientCard.classList.add(
-                    'bg-gray-200', 'dark:bg-gray-700', 'rounded-xl', 'p-6', 'cursor-pointer',
-                    'shadow-lg', 'hover:shadow-2xl', 'hover:scale-105', 'transition-all', 'duration-300',
+                    'bg-gray-200', 'dark:bg-gray-700', 'rounded-lg', 'p-6', 'cursor-pointer', 
+                    'shadow', 'hover:shadow-lg', 'hover:scale-105', 'transition-all', 'duration-300',
                     'flex', 'flex-col', 'items-center', 'text-center', 'client-card-fade-in'
                 );
                 clientCard.style.animationDelay = `${index * 0.1}s`;
                 clientCard.dataset.clientId = client.id;
-                
+
                 clientCard.innerHTML = `
                     <div class="relative w-24 h-24 mb-4">
-                        <img src="${client.icon}" alt="${client.name} icon" class="w-full h-full rounded-lg object-cover shadow-lg">
+                        <img src="${client.icon}" alt="${client.name} icon" class="w-full h-full rounded-lg object-cover">
                     </div>
                     <h3 class="text-xl font-bold mb-1">${client.name}</h3>
                     <p class="text-sm text-gray-600 dark:text-gray-300">by ${client.author}</p>
                 `;
-                
+
                 clientCard.addEventListener('click', () => {
                     renderClientPage(client.id);
                 });
-                
+
                 clientListContainer.appendChild(clientCard);
             });
-            
-            // Show the list page with animation
-            listPage.classList.remove('hidden');
-            listPage.classList.add('page-transition');
-            clientPage.classList.add('hidden');
+
+            renderPagination(clientsData.length);
         }
-        
+
+        function renderPagination(totalClients) {
+            paginationContainer.innerHTML = '';
+            const totalPages = Math.ceil(totalClients / CLIENTS_PER_PAGE);
+
+            if (totalPages <= 1) {
+                return;
+            }
+
+            const prevButton = document.createElement('button');
+            prevButton.innerHTML = `<i class="fas fa-chevron-left"></i>`;
+            prevButton.classList.add('px-3', 'py-1', 'rounded-full', 'transition-colors', 'duration-300', 'hover:bg-gray-300', 'dark:hover:bg-gray-700');
+            prevButton.disabled = currentPage === 1;
+            prevButton.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderClientList(filteredClients.length > 0 ? filteredClients : allClients);
+                }
+            });
+            paginationContainer.appendChild(prevButton);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.textContent = i;
+                pageButton.classList.add('px-3', 'py-1', 'rounded-full', 'transition-colors', 'duration-300');
+                if (i === currentPage) {
+                    pageButton.classList.add('bg-accent', 'text-white');
+                } else {
+                    pageButton.classList.add('hover:bg-gray-300', 'dark:hover:bg-gray-700', 'text-gray-900', 'dark:text-gray-100');
+                }
+                pageButton.addEventListener('click', () => {
+                    currentPage = i;
+                    renderClientList(filteredClients.length > 0 ? filteredClients : allClients);
+                });
+                paginationContainer.appendChild(pageButton);
+            }
+
+            const nextButton = document.createElement('button');
+            nextButton.innerHTML = `<i class="fas fa-chevron-right"></i>`;
+            nextButton.classList.add('px-3', 'py-1', 'rounded-full', 'transition-colors', 'duration-300', 'hover:bg-gray-300', 'dark:hover:bg-gray-700');
+            nextButton.disabled = currentPage === totalPages;
+            nextButton.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderClientList(filteredClients.length > 0 ? filteredClients : allClients);
+                }
+            });
+            paginationContainer.appendChild(nextButton);
+        }
+
         function renderClientPage(clientId) {
-            const client = clientsData.find(c => c.id === clientId);
+            const client = allClients.find(c => c.id === clientId);
             if (!client) {
                 console.error('Client not found');
                 return;
@@ -346,103 +330,143 @@
             currentScreenshotIndex = 0;
             currentClientScreenshots = client.screenshots;
             
-            // Populate the client details page with data
             clientTitle.textContent = client.name;
             clientCardTitle.textContent = client.name;
             clientAuthor.textContent = `By ${client.author}`;
             clientIcon.src = client.icon;
             clientDescription.textContent = client.description;
-            
+
             renderScreenshot(currentScreenshotIndex);
             
-            // Populate downloads section
             downloadsContainer.innerHTML = '';
-            // Check if downloads exist and the object has keys
-            if (client.downloads && Object.keys(client.downloads).length > 0) {
-                // Loop through the key-value pairs of the downloads object
-                Object.entries(client.downloads).forEach(([version, url]) => {
+            if (client.downloads && client.downloads.length > 0) {
+                client.downloads.forEach(download => {
                     const downloadBtn = document.createElement('a');
-                    downloadBtn.href = url; // Now using the actual URL
+                    downloadBtn.href = download.url;
                     downloadBtn.target = '_blank';
-                    downloadBtn.classList.add(
-                        'flex', 'items-center', 'gap-2', 'px-4', 'py-2', 'rounded-lg', 
-                        'font-bold', 'text-white', 'bg-blue-600', 'shadow', 
-                        'hover:bg-blue-700', 'transition-colors'
-                    );
-                    downloadBtn.innerHTML = `<i class="fas fa-download"></i> ${version}`;
+                    
+                    let iconClass = 'fas fa-download';
+                    let buttonColor = 'bg-accent';
+                    if (download.url === '#') {
+                        iconClass = 'fas fa-times';
+                        buttonColor = 'bg-red-600';
+                    }
+
+                    downloadBtn.classList.add('flex', 'items-center', 'gap-2', 'px-4', 'py-2', 'rounded-lg', 'font-bold', 'text-white', buttonColor, 'shadow', 'hover:bg-opacity-80', 'transition-colors');
+                    downloadBtn.innerHTML = `<i class="${iconClass}"></i> v${download.version}`;
+
+                    downloadBtn.addEventListener('click', (e) => {
+                        if (download.url === '#') {
+                            e.preventDefault();
+                            showMessage(`Download link for ${client.name} v${download.version} is not available.`, 'info');
+                        } else {
+                            console.log(`Downloading ${client.name} version ${download.version} from URL: ${download.url}`);
+                            showMessage(`Downloading ${client.name} v${download.version}. Opening new tab...`, 'info');
+                        }
+                    });
                     downloadsContainer.appendChild(downloadBtn);
                 });
             } else {
                 downloadsContainer.innerHTML = '<p class="text-gray-500 dark:text-gray-400">No downloads available.</p>';
             }
-            
-            // Populate socials section
+
             socialsContainer.innerHTML = '';
-            if (client.socials) {
-                if (client.socials.discord) {
-                    const discordLink = document.createElement('a');
-                    discordLink.href = client.socials.discord;
-                    discordLink.target = '_blank';
-                    discordLink.classList.add('text-4xl', 'text-gray-500', 'dark:text-gray-400', 'hover:text-accent', 'transition-colors');
-                    discordLink.innerHTML = '<i class="fab fa-discord"></i>';
-                    socialsContainer.appendChild(discordLink);
-                }
-                if (client.socials.youtube) {
-                    const youtubeLink = document.createElement('a');
-                    youtubeLink.href = client.socials.youtube;
-                    youtubeLink.target = '_blank';
-                    youtubeLink.classList.add('text-4xl', 'text-gray-500', 'dark:text-gray-400', 'hover:text-accent', 'transition-colors');
-                    youtubeLink.innerHTML = '<i class="fab fa-youtube"></i>';
-                    socialsContainer.appendChild(youtubeLink);
-                }
+            if (client.socials.discord) {
+                const discordLink = document.createElement('a');
+                discordLink.href = client.socials.discord;
+                discordLink.target = '_blank';
+                discordLink.classList.add('text-4xl', 'text-gray-500', 'dark:text-gray-400', 'hover:text-accent', 'transition-colors');
+                discordLink.innerHTML = '<i class="fab fa-discord"></i>';
+                socialsContainer.appendChild(discordLink);
             }
-            
-            // Animate transition to client page
+            if (client.socials.youtube) {
+                const youtubeLink = document.createElement('a');
+                youtubeLink.href = client.socials.youtube;
+                youtubeLink.target = '_blank';
+                youtubeLink.classList.add('text-4xl', 'text-gray-500', 'dark:text-gray-400', 'hover:text-accent', 'transition-colors');
+                youtubeLink.innerHTML = '<i class="fab fa-youtube"></i>';
+                socialsContainer.appendChild(youtubeLink);
+            }
+
+            function showMessage(message, type) {
+                const messageBox = document.createElement('div');
+                messageBox.textContent = message;
+                messageBox.classList.add('fixed', 'bottom-4', 'left-1/2', '-translate-x-1/2', 'p-4', 'rounded-lg', 'text-white', 'z-50', 'transform', 'translate-x-[-50%]');
+                if (type === 'info') {
+                    messageBox.classList.add('bg-blue-600');
+                } else if (type === 'success') {
+                    messageBox.classList.add('bg-green-600');
+                } else if (type === 'error') {
+                    messageBox.classList.add('bg-red-600');
+                }
+                document.body.appendChild(messageBox);
+                setTimeout(() => {
+                    messageBox.remove();
+                }, 3000);
+            }
+
             clientPage.classList.remove('hidden');
-            clientPage.classList.add('page-transition');
             listPage.classList.add('hidden');
         }
-        
-        // --- EVENT LISTENERS ---
+
         nextBtn.addEventListener('click', () => {
             currentScreenshotIndex = (currentScreenshotIndex + 1) % currentClientScreenshots.length;
             renderScreenshot(currentScreenshotIndex);
         });
-        
+
         prevBtn.addEventListener('click', () => {
             currentScreenshotIndex = (currentScreenshotIndex - 1 + currentClientScreenshots.length) % currentClientScreenshots.length;
             renderScreenshot(currentScreenshotIndex);
         });
-        
+
         goBackBtn.addEventListener('click', () => {
             listPage.classList.remove('hidden');
-            listPage.classList.add('page-transition');
             clientPage.classList.add('hidden');
         });
-        
-        // --- INITIAL DATA LOAD ---
-        async function initApp() {
-            loadingIndicator.style.display = 'block';
+
+        searchInput.addEventListener('keyup', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            currentPage = 1;
+            
+            if (searchTerm.length > 0) {
+                filteredClients = allClients.filter(client =>
+                    client.name.toLowerCase().includes(searchTerm) ||
+                    client.author.toLowerCase().includes(searchTerm)
+                );
+            } else {
+                filteredClients = [];
+            }
+            
+            renderClientList(filteredClients.length > 0 ? filteredClients : allClients);
+        });
+
+        function preloadScreenshots() {
+            allClients.forEach(client => {
+                client.screenshots.forEach(screenshotUrl => {
+                    const img = new Image();
+                    img.src = screenshotUrl;
+                });
+            });
+        }
+
+        async function fetchAllClientData() {
             try {
-                // Fetch the JSON file from the server
-                const response = await fetch('clients.json');
+                const response = await fetch('clients.yaml');
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                const data = await response.json();
-                
-                clientsData = data;
-                renderClientList();
+                const yamlText = await response.text();
+                const clientData = jsyaml.load(yamlText);
+                allClients = Object.values(clientData);
+                renderClientList(allClients);
+                preloadScreenshots();
             } catch (error) {
                 console.error('Error fetching client data:', error);
                 loadingIndicator.textContent = 'Failed to load client data. Please try again later.';
-                showMessage('Failed to load data. Please check the console for errors.', 'error');
             }
         }
-        
-        // Initialize the app when the window loads
-        window.addEventListener('load', initApp);
+
+        window.onload = fetchAllClientData;
     </script>
 </body>
 </html>
-
