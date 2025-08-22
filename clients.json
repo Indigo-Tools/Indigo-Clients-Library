@@ -4,20 +4,16 @@
     "name": "Glacier Client",
     "author": "Pepe",
     "description": "Glacier Client is an all-in-one PVP client for Minecraft Bedrock Edition. It features a custom user interface, a wide range of utility mods, and a sleek, modern design.",
-    "icon": "https://placehold.co/100x100/313338/ffffff?text=GC",
+    "icon": "https://media.discordapp.net/attachments/1221448852926763069/1404919013032853605/pack_icon.png?ex=68a9768a&is=68a8250a&hm=45d12f2e15b6c52af808e8f16dad14ba46593f85d4ac508b37cfdb895d19daad&=&format=webp&quality=lossless&width=700&height=700",
     "screenshots": [
-      "https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Glacier+Client+1",
-      "https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Glacier+Client+2"
+      "https://media.discordapp.net/attachments/1221448852926763069/1404919632628023477/1000129364-jpg.jpg?ex=68a9771e&is=68a8259e&hm=3e09d3ab8da03768a4fcf58cb4a959c81adb55ad5d29d6842d136e7d63633e21&=&format=webp&width=1753&height=788",
+      "https://media.forgecdn.net/attachments/1276/715/1000129362-jpg.jpg",
+      "https://media.forgecdn.net/attachments/1276/713/1000129360-jpg.jpg"
     ],
     "downloads": [
       {
-        "version": "v4",
-        "url": "#"
-      },
-      {
-        "version": "v5",
-        "url": "#"
-      }
+        "version": "All Versions",
+        "url": "https://glacierclient.xyz/"
     ],
     "socials": {
       "discord": "https://discord.com",
@@ -43,96 +39,5 @@
     "socials": {
       "discord": "https://discord.com"
     }
-  },
-  "crystal-hacks": {
-    "id": "crystal-hacks",
-    "name": "Crystal Hacks",
-    "author": "Unknown",
-    "description": "Crystal Hacks is a utility mod client known for its extensive features and powerful customization. It's designed for advanced players who want complete control over their gameplay.",
-    "icon": "https://placehold.co/100x100/512354/ffffff?text=CH",
-    "screenshots": [
-      "https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Crystal+Hacks+1"
-    ],
-    "downloads": [
-      {
-        "version": "1.0",
-        "url": "#"
-      }
-    ],
-    "socials": {
-      "youtube": "https://youtube.com"
-    }
-  },
-  "better-bedrock": {
-    "id": "better-bedrock",
-    "name": "Better Bedrock",
-    "author": "The Better Bedrock Team",
-    "description": "Enhances the vanilla experience with quality-of-life features.",
-    "icon": "https://placehold.co/100x100/1E90FF/ffffff?text=BB",
-    "screenshots": [],
-    "downloads": [],
-    "socials": {}
-  },
-  "luconia": {
-    "id": "luconia",
-    "name": "Luconia",
-    "author": "Luconia Devs",
-    "description": "A feature-rich PVP client with a focus on competitive play.",
-    "icon": "https://placehold.co/100x100/800080/ffffff?text=L",
-    "screenshots": [],
-    "downloads": [],
-    "socials": {
-      "discord": "https://discord.com"
-    }
-  },
-  "utility-ui": {
-    "id": "utility-ui",
-    "name": "Utility UI",
-    "author": "Unknown",
-    "description": "A modular user interface designed for utility mods.",
-    "icon": "https://placehold.co/100x100/000080/ffffff?text=UUI",
-    "screenshots": [],
-    "downloads": [],
-    "socials": {}
-  },
-  "utility-hud": {
-    "id": "utility-hud",
-    "name": "Utility HUD",
-    "author": "Unknown",
-    "description": "Customizable heads-up display with essential information.",
-    "icon": "https://placehold.co/100x100/008080/ffffff?text=UH",
-    "screenshots": [],
-    "downloads": [],
-    "socials": {}
-  },
-  "evoker-ui": {
-    "id": "evoker-ui",
-    "name": "Evoker UI",
-    "author": "Avaritia",
-    "description": "A clean and intuitive user interface with a sleek design.",
-    "icon": "https://placehold.co/100x100/7B68EE/ffffff?text=EVK",
-    "screenshots": [],
-    "downloads": [],
-    "socials": {}
-  },
-  "some-other-client": {
-    "id": "some-other-client",
-    "name": "Some Other Client",
-    "author": "Anonymous",
-    "description": "Another great client for Minecraft Bedrock.",
-    "icon": "https://placehold.co/100x100/FFD700/ffffff?text=SOC",
-    "screenshots": [],
-    "downloads": [],
-    "socials": {}
-  },
-  "another-client": {
-    "id": "another-client",
-    "name": "Another Client",
-    "author": "Anonymous",
-    "description": "A very basic client to fill up the list.",
-    "icon": "https://placehold.co/100x100/C0C0C0/ffffff?text=AC",
-    "screenshots": [],
-    "downloads": [],
-    "socials": {}
   }
 }
