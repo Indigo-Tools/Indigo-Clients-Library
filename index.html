@@ -360,7 +360,7 @@
                     }
 
                     downloadBtn.classList.add('flex', 'items-center', 'gap-2', 'px-4', 'py-2', 'rounded-lg', 'font-bold', 'text-white', buttonColor, 'shadow', 'hover:bg-opacity-80', 'transition-colors');
-                    downloadBtn.innerHTML = `<i class="${iconClass}"></i> v${download.version}`;
+                    downloadBtn.innerHTML = `<i class="${iconClass}"></i> ${download.version}`;
 
                     downloadBtn.addEventListener('click', (e) => {
                         if (download.url === '#') {
