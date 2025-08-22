@@ -170,27 +170,19 @@
     <script>
         // Data structure provided by the user, for reference.
         /*
-        [
-            {
-                "id": "glacier-client",
-                "name": "Glacier Client",
-                "author": "Pepe",
-                "description": "...",
-                "icon": "https://placehold.co/64x64/2A2A2A/ffffff?text=GC",
-                "screenshots": [
-                    "assets/screenshots/glacier/1.png",
-                    "https://placehold.co/800x450/1D1D1D/ffffff?text=Glacier+Client+2"
-                ],
-                "downloads": [
-                    "v4",
-                    "v5"
-                ],
-                "socials": {
-                    "discord": "https://discord.gg/",
-                    "youtube": "https://youtube.com/"
-                }
-            }
-        ]
+        {
+            "id": "glacier-client",
+            "name": "Glacier Client",
+            "author": "Pepe",
+            "description": "...",
+            "icon": "https://placehold.co/64x64/2A2A2A/ffffff?text=GC",
+            "screenshots": [ "..." ],
+            "downloads": {
+                "v4": "https://mediafire.com/link-to-v4",
+                "v5": "https://mediafire.com/file/Ehq82ndow29nsvh/Glacier_Client_v5.mcpack/"
+            },
+            "socials": { "..." }
+        }
         */
 
         // --- DOM ELEMENT SELECTION ---
@@ -365,23 +357,19 @@
             
             // Populate downloads section
             downloadsContainer.innerHTML = '';
-            if (client.downloads && client.downloads.length > 0) {
-                client.downloads.forEach(version => {
+            // Check if downloads exist and the object has keys
+            if (client.downloads && Object.keys(client.downloads).length > 0) {
+                // Loop through the key-value pairs of the downloads object
+                Object.entries(client.downloads).forEach(([version, url]) => {
                     const downloadBtn = document.createElement('a');
-                    // Use a placeholder URL since the JSON only provides version strings.
-                    downloadBtn.href = "#"; 
+                    downloadBtn.href = url; // Now using the actual URL
                     downloadBtn.target = '_blank';
-                    
-                    const iconClass = 'fas fa-times';
-                    const buttonColor = 'bg-red-600';
-                    
-                    downloadBtn.classList.add('flex', 'items-center', 'gap-2', 'px-4', 'py-2', 'rounded-lg', 'font-bold', 'text-white', buttonColor, 'shadow', 'hover:bg-opacity-80', 'transition-colors');
-                    downloadBtn.innerHTML = `<i class="${iconClass}"></i> ${version}`;
-                    
-                    downloadBtn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        showMessage(`Download link for ${client.name} version ${version} is not available in the data.`, 'info');
-                    });
+                    downloadBtn.classList.add(
+                        'flex', 'items-center', 'gap-2', 'px-4', 'py-2', 'rounded-lg', 
+                        'font-bold', 'text-white', 'bg-blue-600', 'shadow', 
+                        'hover:bg-blue-700', 'transition-colors'
+                    );
+                    downloadBtn.innerHTML = `<i class="fas fa-download"></i> ${version}`;
                     downloadsContainer.appendChild(downloadBtn);
                 });
             } else {
