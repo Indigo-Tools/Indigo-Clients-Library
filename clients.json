@@ -68,5 +68,26 @@
     "socials": {
       "discord": "https://discord.gg/YWTrThNGTZ"
     }
+  },
+  "bedezu-client": {
+    "id": "bedezu-client",
+    "name": "Bedezu Client",
+    "author": "Unknown",
+    "description": "Bedezu Client is a Minecraft Bedrock Edition client known for its optimization and features that mimic the feel of a Java client. It includes an Armor HUD, Keystrokes, and is designed for an FPS boost.",
+    "icon": "https://media.discordapp.net/attachments/1221446665727250522/1221446666188488744/IMG_1843.png?ex=68a9159a&is=68a7c41a&hm=2d220900ca8e2734d8385cc6348daf202aaebe4a1f45483b77f8a74e281d2991",
+    "screenshots": [
+      "https://www.9minecraft.net/wp-content/uploads/2022/09/Bedezu-Client-V8.jpg",
+      "https://www.minecraft-addons.net/wp-content/uploads/2023/12/bedezu_client_v10_1-750x438.jpg",
+      "https://www.minecraft-addons.net/wp-content/uploads/2023/12/bedezu_client_v10_3-750x438.jpg"
+    ],
+    "downloads": [
+      {
+        "version": "All Versions",
+        "url": "https://www.mediafire.com/folder/4s9pqw5tk1vk0/Bedezu"
+      }
+    ],
+    "socials": {
+      "discord": "https://discord.gg/hbb4YMeXwz"
+    }
   }
 }
