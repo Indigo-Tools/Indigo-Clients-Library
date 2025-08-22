@@ -47,5 +47,26 @@
     "socials": {
       "discord": "https://discord.glacierclient.xyz/"
     }
+  },
+  "project-light": {
+    "id": "luconia-client",
+    "name": "Luconia Client",
+    "author": "Lumo/Velan",
+    "description": "Luconia Client is a Minecraft Bedrock client available as a DLL (Windows x64) and texture-pack variant, offering FPS boosts, HUD features, and UI enhancements, with versions including V3 and the Blue Remake.",
+    "icon": "https://media.discordapp.net/attachments/1221660145235398686/1221660145432662036/pack_icon.jpg?ex=68a933ac&is=68a7e22c&hm=ba00d99d0f160c405212777d82069d1e9b0831a68061f6b2fbc63e3a6881f2ab&=&format=webp&width=934&height=934",
+    "screenshots": [
+      "https://i.ytimg.com/vi/Ygdv_WPtxkk/sddefault.jpg",
+      "https://mcpecentral.com/uploads/images/2023/01/image_750x_63d9c28f450a5.jpg",
+      "https://www.9minecraft.net/wp-content/uploads/2022/09/1-Luconia-Client-Blue-MCPE.jpg"
+    ],
+    "downloads": [
+      {
+        "version": "All Versions",
+        "url": "soon"
+      }
+    ],
+    "socials": {
+      "discord": "https://discord.gg/YWTrThNGTZ"
+    }
   }
 }
