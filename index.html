@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Indigo's Client Library</title>
+    <!-- Include Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Include Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <script>
+        // Tailwind configuration, including dark mode and custom colors/fonts.
         tailwind.config = {
             darkMode: 'class',
             theme: {
@@ -22,8 +26,10 @@
         };
     </script>
     <style>
+        /* Import the Inter font from Google Fonts */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
+        /* Keyframe animations for transitions */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -34,15 +40,16 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        #list-page, #client-page {
+        /* Styles for page transitions */
+        .page-transition {
             animation: slideUp 0.8s ease-out forwards;
-            opacity: 0;
         }
 
         .client-card-fade-in {
             animation: fadeIn 0.5s ease-out forwards;
         }
 
+        /* Custom scrollbar for the client details page */
         .custom-scrollbar::-webkit-scrollbar {
             width: 8px;
         }
@@ -62,6 +69,7 @@
 <body class="font-sans bg-gray-100 dark:bg-gray-900 transition-colors duration-500 text-gray-900 dark:text-gray-100 min-h-screen">
 
     <div class="p-6 lg:p-12 max-w-7xl mx-auto w-full">
+        <!-- Header with title and theme toggle button -->
         <div class="flex justify-between items-center mb-10">
             <h1 class="text-3xl lg:text-4xl font-bold text-accent">Indigo's Client Library</h1>
             <button id="themeToggle" class="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
@@ -74,8 +82,10 @@
             </button>
         </div>
 
-        <div id="main-container" class="w-full relative min-h-[600px]">
-            
+        <!-- Main container with dynamic height -->
+        <div id="main-container" class="w-full relative">
+
+            <!-- Page for displaying the list of clients -->
             <div id="list-page" class="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 lg:p-12 absolute inset-0">
                 <header class="mb-8">
                     <h2 class="text-2xl lg:text-3xl font-bold mb-2 text-gray-800 dark:text-gray-100">Client Library</h2>
@@ -85,12 +95,14 @@
                 </header>
 
                 <div id="client-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 min-w-0">
+                    <!-- Loading indicator is shown until data is loaded -->
                     <div id="loading-indicator" class="col-span-full text-center text-gray-500 dark:text-gray-400">
                         Loading client data...
                     </div>
                 </div>
             </div>
 
+            <!-- Page for displaying details of a single client -->
             <div id="client-page" class="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 lg:p-12 absolute inset-0 hidden">
                 <header class="flex justify-between items-center mb-6">
                     <button id="go-back-btn" class="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-300">
@@ -100,7 +112,9 @@
                     <h1 id="client-title" class="text-3xl font-bold text-gray-800 dark:text-gray-100"></h1>
                 </header>
 
+                <!-- Scrollable content area for client details -->
                 <div class="space-y-6 custom-scrollbar overflow-y-auto max-h-[600px] pr-4">
+                    <!-- Main client info card -->
                     <div class="flex items-start gap-4 p-4 rounded-xl bg-gray-200 dark:bg-gray-700">
                         <img id="client-icon" src="" alt="Client Icon" class="w-16 h-16 rounded-lg">
                         <div class="flex-1">
@@ -109,16 +123,19 @@
                         </div>
                     </div>
 
+                    <!-- Description section -->
                     <div>
                         <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">Description</h3>
                         <p id="client-description" class="text-gray-600 dark:text-gray-300 leading-relaxed"></p>
                     </div>
 
+                    <!-- Screenshots section with carousel functionality -->
                     <div>
                         <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">Screenshots</h3>
                         <div class="relative w-full rounded-lg overflow-hidden">
                             <img id="main-screenshot" src="" alt="Client Screenshot" class="w-full h-auto object-cover">
-                            
+
+                            <!-- Carousel navigation buttons -->
                             <button id="prev-btn" class="absolute top-1/2 left-4 transform -translate-y-1/2 p-2 rounded-full bg-black bg-opacity-50 text-white hover:bg-opacity-75 transition-all">
                                 <i class="fas fa-chevron-left"></i>
                             </button>
@@ -126,17 +143,20 @@
                                 <i class="fas fa-chevron-right"></i>
                             </button>
 
+                            <!-- Carousel dots for navigation -->
                             <div id="dots-container" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
                             </div>
                         </div>
                     </div>
 
+                    <!-- Downloads section -->
                     <div>
                         <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">Downloads</h3>
                         <div id="downloads-container" class="flex flex-wrap gap-4">
                         </div>
                     </div>
 
+                    <!-- Socials section -->
                     <div>
                         <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">Socials</h3>
                         <div id="socials-container" class="flex items-center gap-4">
@@ -148,73 +168,38 @@
     </div>
 
     <script>
-        // Placeholder for the JSON data structure. This is what the fetch call expects.
-        // The images you uploaded were of the Glacier Client and the main page.
-        // I will use some placeholder images to create a functioning example.
-        const clients = [
+        // Data structure provided by the user, for reference.
+        /*
+        [
             {
                 "id": "glacier-client",
                 "name": "Glacier Client",
                 "author": "Pepe",
-                "description": "Glacier Client is an all-in-one PVP client for Minecraft Bedrock Edition. It features a custom user interface, a wide range of utility mods, and a sleek, modern design.",
-                "icon": "https://placehold.co/100x100/313338/ffffff?text=GC",
+                "description": "...",
+                "icon": "https://placehold.co/64x64/2A2A2A/ffffff?text=GC",
                 "screenshots": [
-                    "https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Glacier+Client+Screenshot+1",
-                    "https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Glacier+Client+Screenshot+2",
-                    "https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Glacier+Client+Screenshot+3"
+                    "assets/screenshots/glacier/1.png",
+                    "https://placehold.co/800x450/1D1D1D/ffffff?text=Glacier+Client+2"
                 ],
                 "downloads": [
-                    { "version": "v4", "url": "#" },
-                    { "version": "v5", "url": "#" },
-                    { "version": "v6", "url": "#" }
+                    "v4",
+                    "v5"
                 ],
                 "socials": {
-                    "discord": "https://discord.com",
-                    "youtube": "https://youtube.com"
-                }
-            },
-            {
-                "id": "project-light",
-                "name": "Project Light",
-                "author": "Indigo",
-                "description": "Project Light is a lightweight client focusing on performance and a minimalist aesthetic. It's perfect for players who want a clean experience without a lot of clutter.",
-                "icon": "https://placehold.co/100x100/52489c/ffffff?text=PL",
-                "screenshots": [
-                    "https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Project+Light+Screenshot+1",
-                    "https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Project+Light+Screenshot+2"
-                ],
-                "downloads": [
-                    { "version": "v1.0", "url": "#" },
-                    { "version": "v1.1", "url": "#" }
-                ],
-                "socials": {
-                    "discord": "https://discord.com"
-                }
-            },
-            {
-                "id": "crystal-hacks",
-                "name": "Crystal Hacks",
-                "author": "Unknown",
-                "description": "Crystal Hacks is a utility mod client known for its extensive features and powerful customization. It's designed for advanced players who want complete control over their gameplay.",
-                "icon": "https://placehold.co/100x100/512354/ffffff?text=CH",
-                "screenshots": [
-                    "https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Crystal+Hacks+Screenshot+1"
-                ],
-                "downloads": [
-                    { "version": "1.0", "url": "#" }
-                ],
-                "socials": {
-                    "youtube": "https://youtube.com"
+                    "discord": "https://discord.gg/",
+                    "youtube": "https://youtube.com/"
                 }
             }
-        ];
-        
+        ]
+        */
+
+        // --- DOM ELEMENT SELECTION ---
         const clientListContainer = document.getElementById('client-list');
         const listPage = document.getElementById('list-page');
         const clientPage = document.getElementById('client-page');
         const goBackBtn = document.getElementById('go-back-btn');
         const loadingIndicator = document.getElementById('loading-indicator');
-
+        
         const clientTitle = document.getElementById('client-title');
         const clientCardTitle = document.getElementById('client-card-title');
         const clientAuthor = document.getElementById('client-author');
@@ -230,13 +215,18 @@
         const themeToggle = document.getElementById('themeToggle');
         const sunIcon = document.getElementById('sun-icon');
         const moonIcon = document.getElementById('moon-icon');
+        
+        let clientsData = [];
+        let currentScreenshotIndex = 0;
+        let currentClientScreenshots = [];
 
+        // --- THEME TOGGLE FUNCTIONALITY ---
         function toggleTheme() {
             const isDark = document.documentElement.classList.toggle('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             updateThemeIcons(isDark);
         }
-
+        
         function updateThemeIcons(isDark) {
             if (isDark) {
                 sunIcon.style.display = 'block';
@@ -246,7 +236,8 @@
                 moonIcon.style.display = 'block';
             }
         }
-
+        
+        // Apply saved theme on page load
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
@@ -256,14 +247,49 @@
         }
         themeToggle.addEventListener('click', toggleTheme);
 
-        let currentScreenshotIndex = 0;
-        let currentClientScreenshots = [];
-
+        // --- MESSAGE BOX UTILITY ---
+        function showMessage(message, type = 'info') {
+            const messageBox = document.createElement('div');
+            messageBox.textContent = message;
+            messageBox.classList.add(
+                'fixed', 'bottom-4', 'left-1/2', 'p-4', 'rounded-lg', 'text-white', 'z-50',
+                'transition-all', 'duration-300', 'transform', '-translate-x-1/2', 'opacity-0'
+            );
+            if (type === 'info') {
+                messageBox.classList.add('bg-blue-600');
+            } else if (type === 'success') {
+                messageBox.classList.add('bg-green-600');
+            } else if (type === 'error') {
+                messageBox.classList.add('bg-red-600');
+            }
+            document.body.appendChild(messageBox);
+            // Animate fade-in
+            setTimeout(() => {
+                messageBox.style.opacity = '1';
+            }, 10);
+            // Remove after a delay
+            setTimeout(() => {
+                messageBox.style.opacity = '0';
+                messageBox.addEventListener('transitionend', () => messageBox.remove());
+            }, 3000);
+        }
+        
+        // --- SCREENSHOT CAROUSEL FUNCTIONS ---
         function renderScreenshot(index) {
-            mainScreenshot.src = currentClientScreenshots[index];
+            // Note: Relative paths like "assets/screenshots/..." will not work
+            // in a self-contained HTML file. For a working demo, the code will
+            // use a placeholder image if the URL is not a valid web URL.
+            const screenshotUrl = currentClientScreenshots[index];
+            if (screenshotUrl.startsWith('http')) {
+                mainScreenshot.src = screenshotUrl;
+            } else {
+                // Use a placeholder if the path is not an external URL.
+                mainScreenshot.src = `https://placehold.co/800x450/cccccc/333333?text=Image+Not+Found`;
+                showMessage('Local image paths will not work in this preview.', 'info');
+            }
             updateDots(index);
         }
-
+        
         function updateDots(index) {
             dotsContainer.innerHTML = '';
             currentClientScreenshots.forEach((_, i) => {
@@ -282,38 +308,44 @@
             });
         }
         
-        function renderClientList(data) {
-            clients = data;
+        // --- PAGE RENDERING LOGIC ---
+        function renderClientList() {
             loadingIndicator.style.display = 'none';
-            clientListContainer.innerHTML = '';
-            clients.forEach((client, index) => {
+            clientListContainer.innerHTML = ''; // Clear previous list
+            
+            clientsData.forEach((client, index) => {
                 const clientCard = document.createElement('div');
                 clientCard.classList.add(
-                    'bg-gray-200', 'dark:bg-gray-700', 'rounded-lg', 'p-6', 'cursor-pointer', 
-                    'shadow', 'hover:shadow-lg', 'hover:scale-105', 'transition-all', 'duration-300',
+                    'bg-gray-200', 'dark:bg-gray-700', 'rounded-xl', 'p-6', 'cursor-pointer',
+                    'shadow-lg', 'hover:shadow-2xl', 'hover:scale-105', 'transition-all', 'duration-300',
                     'flex', 'flex-col', 'items-center', 'text-center', 'client-card-fade-in'
                 );
                 clientCard.style.animationDelay = `${index * 0.1}s`;
                 clientCard.dataset.clientId = client.id;
-
+                
                 clientCard.innerHTML = `
                     <div class="relative w-24 h-24 mb-4">
-                        <img src="${client.icon}" alt="${client.name} icon" class="w-full h-full rounded-lg object-cover">
+                        <img src="${client.icon}" alt="${client.name} icon" class="w-full h-full rounded-lg object-cover shadow-lg">
                     </div>
                     <h3 class="text-xl font-bold mb-1">${client.name}</h3>
                     <p class="text-sm text-gray-600 dark:text-gray-300">by ${client.author}</p>
                 `;
-
+                
                 clientCard.addEventListener('click', () => {
                     renderClientPage(client.id);
                 });
-
+                
                 clientListContainer.appendChild(clientCard);
             });
+            
+            // Show the list page with animation
+            listPage.classList.remove('hidden');
+            listPage.classList.add('page-transition');
+            clientPage.classList.add('hidden');
         }
-
+        
         function renderClientPage(clientId) {
-            const client = clients.find(c => c.id === clientId);
+            const client = clientsData.find(c => c.id === clientId);
             if (!client) {
                 console.error('Client not found');
                 return;
@@ -322,124 +354,106 @@
             currentScreenshotIndex = 0;
             currentClientScreenshots = client.screenshots;
             
+            // Populate the client details page with data
             clientTitle.textContent = client.name;
             clientCardTitle.textContent = client.name;
             clientAuthor.textContent = `By ${client.author}`;
             clientIcon.src = client.icon;
             clientDescription.textContent = client.description;
-
+            
             renderScreenshot(currentScreenshotIndex);
             
+            // Populate downloads section
             downloadsContainer.innerHTML = '';
             if (client.downloads && client.downloads.length > 0) {
-                client.downloads.forEach(download => {
+                client.downloads.forEach(version => {
                     const downloadBtn = document.createElement('a');
-                    downloadBtn.href = download.url;
+                    // Use a placeholder URL since the JSON only provides version strings.
+                    downloadBtn.href = "#"; 
                     downloadBtn.target = '_blank';
                     
-                    let iconClass = 'fas fa-download';
-                    let buttonColor = 'bg-accent';
-                    if (download.url === '#') {
-                        iconClass = 'fas fa-times';
-                        buttonColor = 'bg-red-600';
-                    }
-
+                    const iconClass = 'fas fa-times';
+                    const buttonColor = 'bg-red-600';
+                    
                     downloadBtn.classList.add('flex', 'items-center', 'gap-2', 'px-4', 'py-2', 'rounded-lg', 'font-bold', 'text-white', buttonColor, 'shadow', 'hover:bg-opacity-80', 'transition-colors');
-                    downloadBtn.innerHTML = `<i class="${iconClass}"></i> v${download.version}`;
-
+                    downloadBtn.innerHTML = `<i class="${iconClass}"></i> ${version}`;
+                    
                     downloadBtn.addEventListener('click', (e) => {
-                        if (download.url === '#') {
-                            e.preventDefault();
-                            showMessage(`Download link for ${client.name} v${download.version} is not available.`, 'info');
-                        } else {
-                            console.log(`Downloading ${client.name} version ${download.version} from URL: ${download.url}`);
-                            showMessage(`Downloading ${client.name} v${download.version}. Opening new tab...`, 'info');
-                        }
+                        e.preventDefault();
+                        showMessage(`Download link for ${client.name} version ${version} is not available in the data.`, 'info');
                     });
                     downloadsContainer.appendChild(downloadBtn);
                 });
             } else {
                 downloadsContainer.innerHTML = '<p class="text-gray-500 dark:text-gray-400">No downloads available.</p>';
             }
-
+            
+            // Populate socials section
             socialsContainer.innerHTML = '';
-            if (client.socials.discord) {
-                const discordLink = document.createElement('a');
-                discordLink.href = client.socials.discord;
-                discordLink.target = '_blank';
-                discordLink.classList.add('text-4xl', 'text-gray-500', 'dark:text-gray-400', 'hover:text-accent', 'transition-colors');
-                discordLink.innerHTML = '<i class="fab fa-discord"></i>';
-                socialsContainer.appendChild(discordLink);
-            }
-            if (client.socials.youtube) {
-                const youtubeLink = document.createElement('a');
-                youtubeLink.href = client.socials.youtube;
-                youtubeLink.target = '_blank';
-                youtubeLink.classList.add('text-4xl', 'text-gray-500', 'dark:text-gray-400', 'hover:text-accent', 'transition-colors');
-                youtubeLink.innerHTML = '<i class="fab fa-youtube"></i>';
-                socialsContainer.appendChild(youtubeLink);
-            }
-
-            function showMessage(message, type) {
-                const messageBox = document.createElement('div');
-                messageBox.textContent = message;
-                messageBox.classList.add('fixed', 'bottom-4', 'left-1/2', '-translate-x-1/2', 'p-4', 'rounded-lg', 'text-white', 'z-50', 'transform', 'translate-x-[-50%]');
-                if (type === 'info') {
-                    messageBox.classList.add('bg-blue-600');
-                } else if (type === 'success') {
-                    messageBox.classList.add('bg-green-600');
-                } else if (type === 'error') {
-                    messageBox.classList.add('bg-red-600');
+            if (client.socials) {
+                if (client.socials.discord) {
+                    const discordLink = document.createElement('a');
+                    discordLink.href = client.socials.discord;
+                    discordLink.target = '_blank';
+                    discordLink.classList.add('text-4xl', 'text-gray-500', 'dark:text-gray-400', 'hover:text-accent', 'transition-colors');
+                    discordLink.innerHTML = '<i class="fab fa-discord"></i>';
+                    socialsContainer.appendChild(discordLink);
                 }
-                document.body.appendChild(messageBox);
-                setTimeout(() => {
-                    messageBox.remove();
-                }, 3000);
+                if (client.socials.youtube) {
+                    const youtubeLink = document.createElement('a');
+                    youtubeLink.href = client.socials.youtube;
+                    youtubeLink.target = '_blank';
+                    youtubeLink.classList.add('text-4xl', 'text-gray-500', 'dark:text-gray-400', 'hover:text-accent', 'transition-colors');
+                    youtubeLink.innerHTML = '<i class="fab fa-youtube"></i>';
+                    socialsContainer.appendChild(youtubeLink);
+                }
             }
-
-            listPage.classList.add('hidden');
+            
+            // Animate transition to client page
             clientPage.classList.remove('hidden');
+            clientPage.classList.add('page-transition');
+            listPage.classList.add('hidden');
         }
-
+        
+        // --- EVENT LISTENERS ---
         nextBtn.addEventListener('click', () => {
             currentScreenshotIndex = (currentScreenshotIndex + 1) % currentClientScreenshots.length;
             renderScreenshot(currentScreenshotIndex);
         });
-
+        
         prevBtn.addEventListener('click', () => {
             currentScreenshotIndex = (currentScreenshotIndex - 1 + currentClientScreenshots.length) % currentClientScreenshots.length;
             renderScreenshot(currentScreenshotIndex);
         });
-
+        
         goBackBtn.addEventListener('click', () => {
-            clientPage.classList.add('hidden');
             listPage.classList.remove('hidden');
+            listPage.classList.add('page-transition');
+            clientPage.classList.add('hidden');
         });
-
-        function preloadScreenshots(data) {
-            data.forEach(client => {
-                client.screenshots.forEach(screenshotUrl => {
-                    const img = new Image();
-                    img.src = screenshotUrl;
-                });
-            });
-        }
-
-        fetch('clients.json')
-            .then(response => {
+        
+        // --- INITIAL DATA LOAD ---
+        async function initApp() {
+            loadingIndicator.style.display = 'block';
+            try {
+                // Fetch the JSON file from the server
+                const response = await fetch('clients.json');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                return response.json();
-            })
-            .then(data => {
-                renderClientList(data);
-                preloadScreenshots(data);
-            })
-            .catch(error => {
-                console.error('Error fetching the client data:', error);
+                const data = await response.json();
+                
+                clientsData = data;
+                renderClientList();
+            } catch (error) {
+                console.error('Error fetching client data:', error);
                 loadingIndicator.textContent = 'Failed to load client data. Please try again later.';
-            });
+                showMessage('Failed to load data. Please check the console for errors.', 'error');
+            }
+        }
+        
+        // Initialize the app when the window loads
+        window.addEventListener('load', initApp);
     </script>
 </body>
 </html>
