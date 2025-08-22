@@ -365,10 +365,10 @@
                     downloadBtn.addEventListener('click', (e) => {
                         if (download.url === '#') {
                             e.preventDefault();
-                            showMessage(`Download link for ${client.name} v${download.version} is not available.`, 'info');
+                            showMessage(`Download link for ${client.name} ${download.version} is not available.`, 'info');
                         } else {
                             console.log(`Downloading ${client.name} version ${download.version} from URL: ${download.url}`);
-                            showMessage(`Downloading ${client.name} v${download.version}. Opening new tab...`, 'info');
+                            showMessage(`Downloading ${client.name} ${download.version}. Opening new tab...`, 'info');
                         }
                     });
                     downloadsContainer.appendChild(downloadBtn);
