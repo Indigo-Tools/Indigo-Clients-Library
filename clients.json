@@ -17,14 +17,14 @@
       }
     ],
     "socials": {
-      "discord": "https://discord.com",
+      "discord": "https://discord.glacierclient.xyz/",
       "youtube": "https://youtube.com"
     }
   },
   "project-light": {
     "id": "project-light",
     "name": "Project Light",
-    "author": "Indigo",
+    "author": "Pepe",
     "description": "Project Light is a lightweight client focusing on performance and a minimalist aesthetic. It's perfect for players who want a clean experience without a lot of clutter.",
     "icon": "https://placehold.co/100x100/52489c/ffffff?text=PL",
     "screenshots": [
@@ -33,12 +33,12 @@
     ],
     "downloads": [
       {
-        "version": "v1.0",
-        "url": "#"
+        "version": "All Versions",
+        "url": "https://www.mediafire.com/folder/ce0ptwtsg1zwz/ProjectLight"
       }
     ],
     "socials": {
-      "discord": "https://discord.com"
+      "discord": "https://discord.glacierclient.xyz/"
     }
   }
 }
