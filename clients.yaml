@@ -1,0 +1,108 @@
+glacier-client:
+  id: glacier-client
+  name: Glacier Client
+  author: Pepe
+  description: Glacier Client is an all-in-one PVP client for Minecraft Bedrock Edition. It features a custom user interface, a wide range of utility mods, and a sleek, modern design.
+  icon: https://placehold.co/100x100/313338/ffffff?text=GC
+  screenshots:
+    - https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Glacier+Client+1
+    - https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Glacier+Client+2
+  downloads:
+    - version: v4
+      url: '#'
+    - version: v5
+      url: '#'
+  socials:
+    discord: https://discord.com
+    youtube: https://youtube.com
+project-light:
+  id: project-light
+  name: Project Light
+  author: Indigo
+  description: Project Light is a lightweight client focusing on performance and a minimalist aesthetic. It's perfect for players who want a clean experience without a lot of clutter.
+  icon: https://placehold.co/100x100/52489c/ffffff?text=PL
+  screenshots:
+    - https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Project+Light+1
+    - https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Project+Light+2
+  downloads:
+    - version: v1.0
+      url: '#'
+  socials:
+    discord: https://discord.com
+crystal-hacks:
+  id: crystal-hacks
+  name: Crystal Hacks
+  author: Unknown
+  description: Crystal Hacks is a utility mod client known for its extensive features and powerful customization. It's designed for advanced players who want complete control over their gameplay.
+  icon: https://placehold.co/100x100/512354/ffffff?text=CH
+  screenshots:
+    - https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Crystal+Hacks+1
+  downloads:
+    - version: 1.0
+      url: '#'
+  socials:
+    youtube: https://youtube.com
+better-bedrock:
+  id: better-bedrock
+  name: Better Bedrock
+  author: The Better Bedrock Team
+  description: Enhances the vanilla experience with quality-of-life features.
+  icon: https://placehold.co/100x100/1E90FF/ffffff?text=BB
+  screenshots: []
+  downloads: []
+  socials: {}
+luconia:
+  id: luconia
+  name: Luconia
+  author: Luconia Devs
+  description: A feature-rich PVP client with a focus on competitive play.
+  icon: https://placehold.co/100x100/800080/ffffff?text=L
+  screenshots: []
+  downloads: []
+  socials:
+    discord: https://discord.com
+utility-ui:
+  id: utility-ui
+  name: Utility UI
+  author: Unknown
+  description: A modular user interface designed for utility mods.
+  icon: https://placehold.co/100x100/000080/ffffff?text=UUI
+  screenshots: []
+  downloads: []
+  socials: {}
+utility-hud:
+  id: utility-hud
+  name: Utility HUD
+  author: Unknown
+  description: Customizable heads-up display with essential information.
+  icon: https://placehold.co/100x100/008080/ffffff?text=UH
+  screenshots: []
+  downloads: []
+  socials: {}
+evoker-ui:
+  id: evoker-ui
+  name: Evoker UI
+  author: Avaritia
+  description: A clean and intuitive user interface with a sleek design.
+  icon: https://placehold.co/100x100/7B68EE/ffffff?text=EVK
+  screenshots: []
+  downloads: []
+  socials: {}
+some-other-client:
+  id: some-other-client
+  name: Some Other Client
+  author: Anonymous
+  description: Another great client for Minecraft Bedrock.
+  icon: https://placehold.co/100x100/FFD700/ffffff?text=SOC
+  screenshots: []
+  downloads: []
+  socials: {}
+another-client:
+  id: another-client
+  name: Another Client
+  author: Anonymous
+  description: A very basic client to fill up the list.
+  icon: https://placehold.co/100x100/C0C0C0/ffffff?text=AC
+  screenshots: []
+  downloads: []
+  socials: {}
