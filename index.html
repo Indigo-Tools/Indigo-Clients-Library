@@ -148,11 +148,10 @@
     </div>
 
     <script>
-        // Placeholder for the JSON data structure
-        // In a real-world scenario, you would have this in a separate clients.json file.
-        // I've included it here as a commented-out reference for the required structure.
-        /*
-        [
+        // Placeholder for the JSON data structure. This is what the fetch call expects.
+        // The images you uploaded were of the Glacier Client and the main page.
+        // I will use some placeholder images to create a functioning example.
+        const clients = [
             {
                 "id": "glacier-client",
                 "name": "Glacier Client",
@@ -161,12 +160,13 @@
                 "icon": "https://placehold.co/100x100/313338/ffffff?text=GC",
                 "screenshots": [
                     "https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Glacier+Client+Screenshot+1",
-                    "https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Glacier+Client+Screenshot+2"
+                    "https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Glacier+Client+Screenshot+2",
+                    "https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Glacier+Client+Screenshot+3"
                 ],
                 "downloads": [
-                    { "version": "v4", "url": "https://example.com/glacier/v4.mcpack" },
-                    { "version": "v5", "url": "https://example.com/glacier/v5.mcpack" },
-                    { "version": "v6", "url": "https://example.com/glacier/v6.mcpack" }
+                    { "version": "v4", "url": "#" },
+                    { "version": "v5", "url": "#" },
+                    { "version": "v6", "url": "#" }
                 ],
                 "socials": {
                     "discord": "https://discord.com",
@@ -184,17 +184,30 @@
                     "https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Project+Light+Screenshot+2"
                 ],
                 "downloads": [
-                    { "version": "v1.0", "url": "https://example.com/project-light/v1.0.mcpack" },
-                    { "version": "v1.1", "url": "https://example.com/project-light/v1.1.mcpack" }
+                    { "version": "v1.0", "url": "#" },
+                    { "version": "v1.1", "url": "#" }
                 ],
                 "socials": {
                     "discord": "https://discord.com"
                 }
+            },
+            {
+                "id": "crystal-hacks",
+                "name": "Crystal Hacks",
+                "author": "Unknown",
+                "description": "Crystal Hacks is a utility mod client known for its extensive features and powerful customization. It's designed for advanced players who want complete control over their gameplay.",
+                "icon": "https://placehold.co/100x100/512354/ffffff?text=CH",
+                "screenshots": [
+                    "https://placehold.co/1200x600/3a02ddfb-ca80-4989-ae26-86dc440cdf72/ffffff?text=Crystal+Hacks+Screenshot+1"
+                ],
+                "downloads": [
+                    { "version": "1.0", "url": "#" }
+                ],
+                "socials": {
+                    "youtube": "https://youtube.com"
+                }
             }
-        ]
-        */
-
-        let clients = [];
+        ];
         
         const clientListContainer = document.getElementById('client-list');
         const listPage = document.getElementById('list-page');
@@ -318,32 +331,36 @@
             renderScreenshot(currentScreenshotIndex);
             
             downloadsContainer.innerHTML = '';
-            client.downloads.forEach(download => {
-                const downloadBtn = document.createElement('a');
-                downloadBtn.href = download.url;
-                downloadBtn.target = '_blank';
-                
-                let iconClass = 'fas fa-download';
-                let buttonColor = 'bg-accent';
-                if (download.url === '#') { // Check if the URL is a placeholder
-                    iconClass = 'fas fa-times';
-                    buttonColor = 'bg-red-600';
-                }
-
-                downloadBtn.classList.add('flex', 'items-center', 'gap-2', 'px-4', 'py-2', 'rounded-lg', 'font-bold', 'text-white', buttonColor, 'shadow', 'hover:bg-opacity-80', 'transition-colors');
-                downloadBtn.innerHTML = `<i class="${iconClass}"></i> v${download.version}`;
-
-                downloadBtn.addEventListener('click', (e) => {
+            if (client.downloads && client.downloads.length > 0) {
+                client.downloads.forEach(download => {
+                    const downloadBtn = document.createElement('a');
+                    downloadBtn.href = download.url;
+                    downloadBtn.target = '_blank';
+                    
+                    let iconClass = 'fas fa-download';
+                    let buttonColor = 'bg-accent';
                     if (download.url === '#') {
-                        e.preventDefault();
-                        showMessage(`Download link for ${client.name} v${download.version} is not available.`, 'info');
-                    } else {
-                        console.log(`Downloading ${client.name} version ${download.version} from URL: ${download.url}`);
-                        showMessage(`Downloading ${client.name} v${download.version}. Opening new tab...`, 'info');
+                        iconClass = 'fas fa-times';
+                        buttonColor = 'bg-red-600';
                     }
+
+                    downloadBtn.classList.add('flex', 'items-center', 'gap-2', 'px-4', 'py-2', 'rounded-lg', 'font-bold', 'text-white', buttonColor, 'shadow', 'hover:bg-opacity-80', 'transition-colors');
+                    downloadBtn.innerHTML = `<i class="${iconClass}"></i> v${download.version}`;
+
+                    downloadBtn.addEventListener('click', (e) => {
+                        if (download.url === '#') {
+                            e.preventDefault();
+                            showMessage(`Download link for ${client.name} v${download.version} is not available.`, 'info');
+                        } else {
+                            console.log(`Downloading ${client.name} version ${download.version} from URL: ${download.url}`);
+                            showMessage(`Downloading ${client.name} v${download.version}. Opening new tab...`, 'info');
+                        }
+                    });
+                    downloadsContainer.appendChild(downloadBtn);
                 });
-                downloadsContainer.appendChild(downloadBtn);
-            });
+            } else {
+                downloadsContainer.innerHTML = '<p class="text-gray-500 dark:text-gray-400">No downloads available.</p>';
+            }
 
             socialsContainer.innerHTML = '';
             if (client.socials.discord) {
@@ -408,7 +425,6 @@
             });
         }
 
-        // Fetch client data from a JSON file
         fetch('clients.json')
             .then(response => {
                 if (!response.ok) {
@@ -427,3 +443,4 @@
     </script>
 </body>
 </html>
+
